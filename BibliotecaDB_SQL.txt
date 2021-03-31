@@ -1,0 +1,46 @@
+create table Alumnos
+(
+cuenta int not null primary key,
+nombres varchar(50),
+carrera varchar(50),
+celular varchar(20),
+correo varchar(50)
+);
+
+create table Libros
+(
+id_libro int not null primary key,
+titulo varchar(100),
+autor varchar(100),
+anio int,
+multapordia numeric(10,2)
+);
+
+create table Prestamos
+(
+id_prestamo int primary key identity,
+alumno_cuenta int foreign key references Alumnos(cuenta),
+libro_id int foreign key references Libros(id_libro),
+fecha_entrega date not null,
+fecha_a_devolver date not null,
+fecha_devolucion date,
+observaciones varchar(255)
+);
+
+insert into Alumnos values(21153035,'Allan Noe','Electronica','98851518','allan.villatoro@unitec.edu.hn'),
+(21153036,'Joel','Informatica','99999999','joel@unitec.edu'),
+(21153037,'Erick','Informatica','99999999','erick@unitec.edu'),
+(21153038,'Mario','Informatica','99999999','mario@unitec.edu'),
+(21153039,'Edwin','Informatica','99999999','edwin@unitec.edu'),
+(21153040,'Jose','Informatica','99999999','jose@unitec.edu');
+
+insert into Libros values (101, 'Programacion en .NET','Deitel',2014,10.25),
+(102, 'Programacion en C++','Deitel',2010,12.55),
+(103, 'JavaScript','Deitel',2015,20.55),
+(104, 'Estructura de Datos','Deitel',2007,6.80);
+
+insert into Prestamos values (21153035,101,GETDATE(),'2021-02-08',null,'ninguna'),
+(21153036,102,'2021-01-26','2021-01-30','2021-01-29','ninguna'),
+(21153037,103,'2021-01-28','2021-01-31','2021-02-01','ninguna'),
+(21153038,104,GETDATE(),'2021-01-05',null,'ninguna'),
+(21153039,102,GETDATE(),'2021-01-06',null,'ninguna');
